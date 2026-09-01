@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const VIDEO_URL = 'https://www.youtube.com/embed/uvMe7Z7_5-Q'
-const CAPTION =
-  'Collage of clips recorded over the past few months.\nCamera: Sony a6000\nLens 1: Viltrox 25mm f/1.7\nLens 2: TTArtisan 7.5mm f/2.0'
+const VIDEO_URL = 'https://www.youtube.com/embed/q77fmTOMGyg'
+const CAPTION = 'Recent trip to Boston'
 
 function Video() {
   useEffect(() => {

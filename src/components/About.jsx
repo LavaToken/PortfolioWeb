@@ -23,14 +23,13 @@ function About() {
               I'm a Computer Science student at UC Davis with a focus
               on growth and building products people actually use. 
               Most recently, I worked as a Data Analytics Intern at Travis Credit Union, 
-              a member-owned financial institution built to serve people instead of shareholders. 
-              I care about the intersection of engineering and consumer behavior: writing code that ships
+              a member-owned financial institution serving over 268,000 members andbuilt to serve people instead of shareholders. 
+              I care about the intersection of engineering and consumer behavior: creating products that people actually use
               and measuring the results.
             </p>
             <p>
-              Outside of engineering, I run marketing and content for
-              Google Developer Student Club, shoot street and documentary
-              photography/videography, and build mechanical keyboards. 
+              Outside of engineering, I work for UC Davis's Chinese American Student Association as Co-President,
+              shoot street and documentary photography/videography, and build mechanical keyboards.
             </p>
           </div>
         </div>
@@ -41,12 +40,8 @@ function About() {
 
         <div className="about__stats reveal">
           <div className="about__stat">
-            <span className="about__stat-value">3rd</span>
+            <span className="about__stat-value">4th</span>
             <span className="about__stat-label">Year — UC Davis CS</span>
-          </div>
-          <div className="about__stat">
-            <span className="about__stat-value">5</span>
-            <span className="about__stat-label">Shipped projects</span>
           </div>
           <div className="about__stat">
             <span className="about__stat-value">San Jose</span>

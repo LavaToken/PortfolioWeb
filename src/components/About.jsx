@@ -23,7 +23,7 @@ function About() {
               I'm a Computer Science student at UC Davis with a focus
               on growth and building products people actually use. 
               Most recently, I worked as a Data Analytics Intern at Travis Credit Union, 
-              a member-owned financial institution serving over 268,000 members andbuilt to serve people instead of shareholders. 
+              a member-owned financial institution serving over 268,000 members and built to serve people instead of shareholders. 
               I care about the intersection of engineering and consumer behavior: creating products that people actually use
               and measuring the results.
             </p>

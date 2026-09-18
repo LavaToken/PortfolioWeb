@@ -28,8 +28,8 @@ function About() {
               and measuring the results.
             </p>
             <p>
-              Outside of engineering, I work for UC Davis's Chinese American Student Association as Co-President,
-              shoot street and documentary photography/videography, and build mechanical keyboards.
+              Outside of engineering, I work contracting roles in photography and videography,
+              manage UC Davis's Chinese American Student Association, and build mechanical keyboards.
             </p>
           </div>
         </div>

@@ -13,8 +13,8 @@ function formatClock(date) {
 
 function SiteHeader() {
   const [time, setTime] = useState(() => formatClock(new Date()))
-  const [hobbiesOpen, setHobbiesOpen] = useState(false)
-  const hobbiesRef = useRef(null)
+  const [creativeOpen, setCreativeOpen] = useState(false)
+  const creativeRef = useRef(null)
 
   useEffect(() => {
     const id = setInterval(() => setTime(formatClock(new Date())), 1000)
@@ -22,16 +22,16 @@ function SiteHeader() {
   }, [])
 
   useEffect(() => {
-    if (!hobbiesOpen) return undefined
+    if (!creativeOpen) return undefined
 
     const handlePointerDown = (event) => {
-      if (!hobbiesRef.current?.contains(event.target)) {
-        setHobbiesOpen(false)
+      if (!creativeRef.current?.contains(event.target)) {
+        setCreativeOpen(false)
       }
     }
 
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') setHobbiesOpen(false)
+      if (event.key === 'Escape') setCreativeOpen(false)
     }
 
     document.addEventListener('pointerdown', handlePointerDown)
@@ -40,7 +40,7 @@ function SiteHeader() {
       document.removeEventListener('pointerdown', handlePointerDown)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [hobbiesOpen])
+  }, [creativeOpen])
 
   const tz = 'San Francisco'
 
@@ -61,24 +61,24 @@ function SiteHeader() {
           Projects →
         </Link>
         <div
-          className={`meta-strip__dropdown${hobbiesOpen ? ' is-open' : ''}`}
-          ref={hobbiesRef}
+          className={`meta-strip__dropdown${creativeOpen ? ' is-open' : ''}`}
+          ref={creativeRef}
         >
           <button
             type="button"
             className="meta-strip__link meta-strip__dropdown-trigger"
-            aria-expanded={hobbiesOpen}
+            aria-expanded={creativeOpen}
             aria-haspopup="true"
-            onClick={() => setHobbiesOpen((open) => !open)}
+            onClick={() => setCreativeOpen((open) => !open)}
           >
-            Hobbies →
+            Creative →
           </button>
           <div className="meta-strip__dropdown-menu" role="menu">
             <Link
               className="meta-strip__dropdown-item"
               to="/photography"
               role="menuitem"
-              onClick={() => setHobbiesOpen(false)}
+              onClick={() => setCreativeOpen(false)}
             >
               Photography
             </Link>
@@ -86,7 +86,7 @@ function SiteHeader() {
               className="meta-strip__dropdown-item"
               to="/video"
               role="menuitem"
-              onClick={() => setHobbiesOpen(false)}
+              onClick={() => setCreativeOpen(false)}
             >
               Video
             </Link>

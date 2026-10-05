@@ -1095,12 +1095,24 @@ main { padding-top: var(--strip-h); }
   width: 100%;
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 2rem var(--pad-x);
+  padding: 0 var(--pad-x);
+  display: flex;
+  flex-direction: column;
+}
+
+.video-page__row {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--gutter);
-  align-content: center;
   align-items: center;
+  min-height: calc(100vh - var(--strip-h));
+  padding: 3rem 0;
+  box-sizing: border-box;
+}
+
+.video-page__row + .video-page__row {
+  border-top: 1px solid var(--border-dark);
 }
 
 .video-page__copy {
@@ -1114,6 +1126,14 @@ main { padding-top: var(--strip-h); }
   background: var(--bg-dark);
   overflow: hidden;
   border: 1px solid var(--border-dark);
+}
+
+.video-page__row--flip .video-page__embed {
+  grid-column: 1 / span 7;
+}
+
+.video-page__row--flip .video-page__copy {
+  grid-column: 9 / span 4;
 }
 
 .video-page__embed iframe {
@@ -1149,9 +1169,57 @@ main { padding-top: var(--strip-h); }
   white-space: pre-line;
 }
 
+.video-page__more {
+  position: absolute;
+  left: 50%;
+  bottom: 1.15rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted-on-dark);
+  cursor: pointer;
+  transform: translateX(-50%);
+  animation: video-more-bob 1.6s ease-in-out infinite;
+}
+
+.video-page__more svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.video-page__more:hover,
+.video-page__more:focus-visible {
+  color: var(--text-on-dark);
+  outline: none;
+}
+
+@keyframes video-more-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(7px); }
+}
+
 @media (max-width: 900px) {
-  .video-page__copy  { grid-column: 1 / -1; margin-bottom: 2.5rem; }
-  .video-page__embed { grid-column: 1 / -1; }
+  .video-page__row {
+    min-height: 0;
+    padding: 2.5rem 0 3rem;
+  }
+  .video-page__row .video-page__copy,
+  .video-page__row .video-page__embed,
+  .video-page__row--flip .video-page__copy,
+  .video-page__row--flip .video-page__embed {
+    grid-column: 1 / -1;
+  }
+  .video-page__copy { margin-bottom: 1.5rem; }
 }
 
 /* =========================================================

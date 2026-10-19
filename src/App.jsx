@@ -9,6 +9,7 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { useParallax } from './hooks/useParallax'
+import { prefetchPhotographyPreviews } from './photographyPrefetch'
 
 function App() {
   const location = useLocation()
@@ -16,6 +17,16 @@ function App() {
 
   useEffect(() => {
     document.title = 'Kevin Jia — Computer Engineer'
+  }, [])
+
+  useEffect(() => {
+    const run = () => prefetchPhotographyPreviews()
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(run, { timeout: 2000 })
+      return () => window.cancelIdleCallback(id)
+    }
+    const id = window.setTimeout(run, 200)
+    return () => window.clearTimeout(id)
   }, [])
 
   useEffect(() => {

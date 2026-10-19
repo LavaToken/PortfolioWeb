@@ -4,7 +4,7 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import GhostNumber from './GhostNumber'
 
 const RESUME_URL =
-  'https://docs.google.com/document/d/1jIyBYGgwHdbalqo_ZQLSnzOqcqsGyzJVM8EHtnwwA8w/edit?usp=sharing'
+  'https://docs.google.com/document/d/13MnRyka_OEvYgl3EnyZNQ9iaPzpfow7H2QxLVrufibs/edit?usp=sharing'
 
 function Contact() {
   const sectionRef = useIntersectionObserver()

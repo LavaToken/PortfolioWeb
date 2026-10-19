@@ -1042,6 +1042,38 @@ main { padding-top: var(--strip-h); }
   opacity: 0.85;
 }
 
+.photo-page__lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-page__lightbox-preview {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.photo-page__lightbox-stage .yarl__slide_image {
+  transition: opacity 200ms ease;
+}
+
+.photo-page__lightbox-stage .yarl__slide_placeholder {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-page__lightbox-stage .yarl__slide_image {
+    transition: none;
+  }
+}
+
 /* =========================================================
    Video page (/video)
    ========================================================= */

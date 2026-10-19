@@ -10,6 +10,29 @@ const MANIFEST_URL = `${BASE}photography/photo-manifest.json`
 const PHOTOS_URL =
   'https://www.amazon.com/photos/shared/yH1eG0HKTqyo7-iEKtYoVA.jBfIncrso6uFXPr6cexanX'
 
+function LightboxStage({ slide, children }) {
+  if (!slide.thumb || slide.thumb === slide.src) return children
+
+  const style = {
+    maxWidth: slide.width ? `min(${slide.width}px, 100%)` : '100%',
+    maxHeight: slide.height ? `min(${slide.height}px, 100%)` : '100%',
+  }
+
+  return (
+    <div className="photo-page__lightbox-stage">
+      <img
+        className="photo-page__lightbox-preview"
+        src={slide.thumb}
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+        style={style}
+      />
+      {children}
+    </div>
+  )
+}
+
 function Photography() {
   const [photos, setPhotos] = useState([])
   const [status, setStatus] = useState('loading')
@@ -25,10 +48,15 @@ function Photography() {
       })
       .then((data) => {
         if (cancelled) return
-        const resolved = (Array.isArray(data) ? data : []).map((photo) => ({
-          ...photo,
-          src: `${BASE}${photo.src}`,
-        }))
+        const resolved = (Array.isArray(data) ? data : []).map((photo) => {
+          const src = `${BASE}${photo.src}`
+          return {
+            src,
+            thumb: `${BASE}${photo.thumb || photo.src}`,
+            width: photo.width,
+            height: photo.height,
+          }
+        })
         setPhotos(resolved)
         setStatus('ready')
       })
@@ -45,8 +73,25 @@ function Photography() {
     document.title = 'Photography — Kevin Jia'
   }, [])
 
+  const albumPhotos = useMemo(
+    () =>
+      photos.map((photo) => ({
+        src: photo.thumb || photo.src,
+        width: photo.width,
+        height: photo.height,
+        key: photo.src,
+      })),
+    [photos],
+  )
+
   const slides = useMemo(
-    () => photos.map(({ src, width, height }) => ({ src, width, height })),
+    () =>
+      photos.map(({ src, thumb, width, height }) => ({
+        src,
+        thumb,
+        width,
+        height,
+      })),
     [photos],
   )
 
@@ -80,7 +125,7 @@ function Photography() {
         {status === 'ready' && photos.length > 0 && (
           <PhotoAlbum
             layout="rows"
-            photos={photos}
+            photos={albumPhotos}
             spacing={4}
             targetRowHeight={320}
             onClick={({ index: current }) => setIndex(current)}
@@ -104,6 +149,7 @@ function Photography() {
         close={() => setIndex(-1)}
         index={index}
         slides={slides}
+        render={{ slideContainer: LightboxStage }}
       />
     </div>
   )

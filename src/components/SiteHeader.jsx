@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { prefetchPhotographyPreviews } from '../photographyPrefetch'
 
 const RESUME_URL =
-  'https://docs.google.com/document/d/1jIyBYGgwHdbalqo_ZQLSnzOqcqsGyzJVM8EHtnwwA8w/edit?usp=sharing'
+  'https://docs.google.com/document/d/13MnRyka_OEvYgl3EnyZNQ9iaPzpfow7H2QxLVrufibs/edit?usp=sharing'
 
 function formatClock(date) {
   const hh = String(date.getHours()).padStart(2, '0')
@@ -20,6 +21,10 @@ function SiteHeader() {
     const id = setInterval(() => setTime(formatClock(new Date())), 1000)
     return () => clearInterval(id)
   }, [])
+
+  useEffect(() => {
+    if (creativeOpen) prefetchPhotographyPreviews()
+  }, [creativeOpen])
 
   useEffect(() => {
     if (!creativeOpen) return undefined

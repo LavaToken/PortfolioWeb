@@ -7,6 +7,17 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+// html { scroll-behavior: smooth } would animate scrollTo(0, 0). The gallery
+// mounts while that animation is still running, so the browser treats the
+// first rows as off-screen and never loads them until the next user scroll.
+function scrollToTop() {
+  const html = document.documentElement
+  const previous = html.style.scrollBehavior
+  html.style.scrollBehavior = 'auto'
+  window.scrollTo(0, 0)
+  html.style.scrollBehavior = previous
+}
+
 function AnimatedRoutes({ children }) {
   const location = useLocation()
   const [displayLocation, setDisplayLocation] = useState(location)
@@ -23,7 +34,7 @@ function AnimatedRoutes({ children }) {
 
     if (prefersReducedMotion()) {
       setDisplayLocation(location)
-      window.scrollTo(0, 0)
+      scrollToTop()
       return
     }
 
@@ -38,7 +49,7 @@ function AnimatedRoutes({ children }) {
     if (phase === 'out' && pendingLocation.current) {
       setDisplayLocation(pendingLocation.current)
       pendingLocation.current = null
-      window.scrollTo(0, 0)
+      scrollToTop()
       setPhase('in')
       return
     }
